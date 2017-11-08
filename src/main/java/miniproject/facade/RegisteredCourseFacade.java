@@ -20,5 +20,7 @@ public class RegisteredCourseFacade extends AbstractFacade<RegisteredCourse>{
 		// TODO Auto-generated method stub
 		return em;
 	}
+	
+
 
 }

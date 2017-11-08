@@ -14,27 +14,27 @@ import miniproject.facade.*;
 
 @ManagedBean
 public class FacultyBean implements Serializable {
-	
+
 	private String name;
 	private String email;
 	private String password;
 	private String coursename;
 	private String courseid;
-	
+
 	private static Student student;
 	private Course course;
 	private RegisteredCourse registeredCourse;
-	
+
 	@Inject
 	@EJB private StudentFacade studentEJB;
 	@EJB private CourseFacade courseEJB;
 	@EJB private RegisteredCourseFacade registeredCourseEJB;
-	
+
 	private List<Course> courseList;
 	private List<Student> studentList;
-	
+
 	private static final long serialVersionUID = 1L;
-	
+
 	public List<Course> getCourseList(){
 		if (courseList == null) {
 			courseList = courseEJB.findAll();
@@ -47,13 +47,13 @@ public class FacultyBean implements Serializable {
 		studentEJB.create(student);
 		return "coursereg";
 	}
-	
-	public void registerCourse(Course course){
-				registeredCourse.setCourseName(course.getCoursename());
-				registeredCourse = new RegisteredCourse(course, student);
-				registeredCourseEJB.create(registeredCourse);
+
+	public void registerCourse(){
+		course = courseEJB.findByName(coursename);
+		registeredCourse = new RegisteredCourse(course, student);
+		registeredCourseEJB.create(registeredCourse);
 	}
-	
+
 	public void register(RegisteredCourse registered){
 		registeredCourseEJB.edit(registered);
 	}
@@ -121,10 +121,10 @@ public class FacultyBean implements Serializable {
 	public void setRegisteredCourse(RegisteredCourse registeredCourse) {
 		this.registeredCourse = registeredCourse;
 	}
-	
+
 	public RegisteredCourseFacade getRegisteredCourseFacade(){
 		return registeredCourseEJB;
 	}
-	
-	
+
+
 }

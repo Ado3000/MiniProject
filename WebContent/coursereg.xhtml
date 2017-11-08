@@ -10,11 +10,13 @@
 <h:body>
 
 	<h:form>
-		<p:selectOneMenu value="#{facultyBean.coursename}">
-			<f:selectItems value="#{facultyBean.courseList}" var="c"
-				itemLabel="#{c.coursename}" itemValue="#{c}" />
-			<p:ajax listener="#{facultyBean.registerCourse(c)}"/>
-		</p:selectOneMenu>
+		<h:panelGrid rows="8" columns="2">
+		<h:outputLabel>Course Name</h:outputLabel>
+		<h:inputText id="studentName" value="#{facultyBean.coursename}"></h:inputText>
+		<br></br>
+		<br></br>
+			<h:commandButton value="Register" action="#{facultyBean.registerCourse}"/>
+			</h:panelGrid>
 	</h:form>
 
 

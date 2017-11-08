@@ -8,6 +8,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.*;
 
 
 @Entity
@@ -32,12 +33,10 @@ public class RegisteredCourse {
 	@JoinColumn(name="email", referencedColumnName="email", nullable=false)
 	private Student student;
 
-	@ManyToOne
-	@JoinColumn(name="courseid", referencedColumnName="courseid", nullable=false)
+	@JoinColumns({
+		  @JoinColumn(name = "courseid",referencedColumnName="courseid", nullable=false),
+		  @JoinColumn(name = "coursename",referencedColumnName="coursename", nullable=false)})
 	private Course course;
-	
-	@JoinColumn(name="coursename", referencedColumnName="coursename", nullable=false)
-	private String courseName;
 
 	public Student getStudent() {
 		return student;
@@ -63,13 +62,6 @@ public class RegisteredCourse {
 		this.id = id;
 	}
 
-	public String getCourseName() {
-		return courseName;
-	}
-
-	public void setCourseName(String courseName) {
-		this.courseName = courseName;
-	}
 	
 	
 	
